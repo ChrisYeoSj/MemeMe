@@ -1,5 +1,5 @@
 //
-//  MemeObject.swift
+//  MemeInstance.swift
 //  imagePickerExperiment
 //
 //  Created by Christopher on 16/8/15.

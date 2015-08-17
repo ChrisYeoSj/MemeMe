@@ -27,6 +27,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         shareButton.enabled = pickedImage.image != nil //if no image is picked, sharebutton will be disabled.
         
+        println("initial: \(pickedImage.bounds.size)")
+        
         setTextAttributes("HelveticaNeue-CondensedBlack")
     }
     
@@ -78,6 +80,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
                 pickedImage.image = image
                 shareButton.enabled = pickedImage.image != nil
+                println("image :\(image.size)")
+                println("image: \(image.size.height)")
+                println("UIimage: \(pickedImage.frame.size)")
+                println("UIimage: \(pickedImage.bounds.size.height)")
+                
             }
             
             dismissViewControllerAnimated(true, completion: nil)
@@ -117,23 +124,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if bottomTextField.resignFirstResponder(){
             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.view.frame.origin.y += self.getKeyboardHeight(notification)
+                self.view.frame.origin.y = 0
             })
         }
     }
     
     func generateMemeImage() -> UIImage{
         
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.toolbar.hidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        toolbar.hidden = true
         
         UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memeImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.toolbar.hidden = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        toolbar.hidden = false
+        
+        
+        //todo Detect image onscreen location and adjusts the position of the text fields accordingly
         
         return memeImage
     }
@@ -152,7 +162,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        pickerController.allowsEditing = true
+        //pickerController.allowsEditing = true
         presentViewController(pickerController, animated: true, completion: nil)
         
     }
@@ -166,7 +176,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func cancelButton(sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func shareMemeButton(sender: AnyObject) {
