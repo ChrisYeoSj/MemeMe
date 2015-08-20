@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -80,11 +81,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
                 pickedImage.image = image
                 shareButton.enabled = pickedImage.image != nil
-                println("image :\(image.size)")
-                println("image: \(image.size.height)")
-                println("UIimage: \(pickedImage.frame.size)")
-                println("UIimage: \(pickedImage.bounds.size.height)")
                 
+                let rect = CGRectIntegral(AVMakeRectWithAspectRatioInsideRect(pickedImage.image!.size, pickedImage.bounds))
+                
+                //TODO: Tag textfields to the UIImage bounds.
+                
+                println(rect)
             }
             
             dismissViewControllerAnimated(true, completion: nil)
@@ -183,6 +185,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let activityController = UIActivityViewController(activityItems: [generateMemeImage()], applicationActivities: nil)
         
+        saveMeme()
+        
         activityController.completionWithItemsHandler = {
             (activity, success, items, error) in
             println("Activity: \(activity) Success: \(success) Items: \(items) Error: \(error)")
@@ -199,6 +203,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func saveMeme(){
         
         var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, memeImage: generateMemeImage(), originalImage: pickedImage.image!)
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memesArray.append(meme)
         
     }
     
