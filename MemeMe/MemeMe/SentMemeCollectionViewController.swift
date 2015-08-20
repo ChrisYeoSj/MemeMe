@@ -64,7 +64,24 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
     
         return cell
     }
-
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC : MemeDetailViewController = storyboard.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        detailVC.memedImage = meme[indexPath.item].memedImage
+        
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        
+    }
+    @IBAction func segueToAddMeme(sender: UIBarButtonItem) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var createMemeVC = storyboard.instantiateViewControllerWithIdentifier("createMemeViewController") as! ViewController
+        let navController = UINavigationController(rootViewController: createMemeVC)
+        self.presentViewController(navController, animated: true, completion: nil)
+        
+    }
 
     /*
     // Uncomment this method to specify if the specified item should be selected

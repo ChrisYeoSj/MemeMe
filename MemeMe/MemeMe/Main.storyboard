@@ -357,7 +357,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="sharedMemeTable" destination="hUq-9x-yD8" id="NHz-Df-1bY"/>
-                        <segue destination="oe9-2X-Afd" kind="show" id="j9V-I5-zeT"/>
+                        <segue destination="oe9-2X-Afd" kind="show" identifier="segueToDetails" id="j9V-I5-zeT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSg-JX-HAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -417,7 +417,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="uMj-0A-IYi"/>
+                    <navigationItem key="navigationItem" id="uMj-0A-IYi">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4j5-OQ-qGL">
+                            <connections>
+                                <action selector="segueToAddMeme:" destination="feT-Ib-VQe" id="Dc0-sm-Rgw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="oe9-2X-Afd" kind="show" id="V9C-Oi-cTm"/>
                     </connections>
@@ -437,12 +443,48 @@
                     <view key="view" contentMode="scaleToFill" id="X8i-E8-uqL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4gj-GD-6Wk">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4gj-GD-6Wk" firstAttribute="top" secondItem="V27-Wr-7Az" secondAttribute="bottom" id="EGU-C4-m44"/>
+                            <constraint firstItem="4gj-GD-6Wk" firstAttribute="leading" secondItem="X8i-E8-uqL" secondAttribute="leading" id="GIr-jC-lFi"/>
+                            <constraint firstAttribute="trailing" secondItem="4gj-GD-6Wk" secondAttribute="trailing" id="SMV-qN-992"/>
+                            <constraint firstItem="4gj-GD-6Wk" firstAttribute="bottom" secondItem="OSY-Is-Bv2" secondAttribute="top" id="ve7-iz-lvf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="4gj-GD-6Wk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="EGU-C4-m44"/>
+                                <exclude reference="GIr-jC-lFi"/>
+                                <exclude reference="SMV-qN-992"/>
+                                <exclude reference="ve7-iz-lvf"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="4gj-GD-6Wk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="EGU-C4-m44"/>
+                                <include reference="GIr-jC-lFi"/>
+                                <include reference="SMV-qN-992"/>
+                                <include reference="ve7-iz-lvf"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="4gj-GD-6Wk" id="RFn-UJ-uj4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cin-4r-h3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342.5" y="378.75"/>
+            <point key="canvasLocation" x="1380" y="387"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dL4-5t-B6w">
@@ -506,6 +548,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="j9V-I5-zeT"/>
+        <segue reference="V9C-Oi-cTm"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -15,14 +15,13 @@ class MemeDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
         imageView.image = memedImage
-        
     }
 
     override func didReceiveMemoryWarning() {

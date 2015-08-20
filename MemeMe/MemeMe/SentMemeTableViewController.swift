@@ -69,9 +69,10 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        println(meme[indexPath.row].memedImage)
         detailVC.memedImage = meme[indexPath.row].memedImage
         
-        presentViewController(detailVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(detailVC, animated: true)
         
     }
     
@@ -83,5 +84,4 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
         self.presentViewController(navController, animated: true, completion: nil)
         
     }
-
 }
