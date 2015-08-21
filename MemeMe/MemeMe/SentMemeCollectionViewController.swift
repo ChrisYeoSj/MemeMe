@@ -13,6 +13,7 @@ let reuseIdentifier = "sentMemeCell"
 class SentMemeCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var meme : [Meme]!
+    @IBOutlet var sentMemeCollection: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,11 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
         //self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        sentMemeCollection.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +83,7 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
     @IBAction func segueToAddMeme(sender: UIBarButtonItem) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var createMemeVC = storyboard.instantiateViewControllerWithIdentifier("createMemeViewController") as! ViewController
+        var createMemeVC = storyboard.instantiateViewControllerWithIdentifier("createMemeViewController") as! MemeViewController
         let navController = UINavigationController(rootViewController: createMemeVC)
         self.presentViewController(navController, animated: true, completion: nil)
         

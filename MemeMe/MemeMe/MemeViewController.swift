@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeViewController.swift
 //  MemeMe
 //
 //  Created by Christopher on 17/8/15.
@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet var pickedImage: UIImageView!
     @IBOutlet var shareButton: UIBarButtonItem!
@@ -18,7 +18,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var topTextField: UITextField!
     @IBOutlet var cameraButton: UIBarButtonItem!
     @IBOutlet var albumButton: UIBarButtonItem!
+    @IBOutlet var randomFontButton: UIButton!
     
+    var image : UIImage!
     var randomFonts: [String]!
     
     override func viewDidLoad() {
@@ -31,10 +33,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         println("initial: \(pickedImage.bounds.size)")
         
         setTextAttributes("HelveticaNeue-CondensedBlack")
+        
+        if image != nil{
+            pickedImage.image = image
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+
+        
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotification()
     }
@@ -82,14 +91,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 pickedImage.image = image
                 shareButton.enabled = pickedImage.image != nil
                 
-                let rect = CGRectIntegral(AVMakeRectWithAspectRatioInsideRect(pickedImage.image!.size, pickedImage.bounds))
+                //let rect = CGRectIntegral(AVMakeRectWithAspectRatioInsideRect(pickedImage.image!.size, pickedImage.bounds))
                 
                 //TODO: Tag textfields to the UIImage bounds.
-                
-                println(rect)
             }
             
-            dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
             
     }
     
@@ -135,6 +142,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         navigationController?.setNavigationBarHidden(true, animated: true)
         toolbar.hidden = true
+        randomFontButton.hidden = true
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
@@ -143,6 +151,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         toolbar.hidden = false
+        randomFontButton.hidden = false
         
         
         //todo Detect image onscreen location and adjusts the position of the text fields accordingly
@@ -194,6 +203,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 
                 let successMessage = UIAlertView(title: "Success", message: nil, delegate: self, cancelButtonTitle: "OK")
                 successMessage.show()
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
         self.navigationController!.presentViewController(activityController, animated: true, completion: nil)

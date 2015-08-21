@@ -15,20 +15,9 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "Sent Memes"
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.title = "Sent Memes" //todo
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewWillAppear(animated: Bool) {
         let object = UIApplication.sharedApplication().delegate
@@ -40,13 +29,10 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: - Table view data source
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
         return 1
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return meme.count
     }
 
@@ -54,15 +40,8 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
         let cell = tableView.dequeueReusableCellWithIdentifier("sentMemeCell", forIndexPath: indexPath) as! SentMemeTableViewCell
         
         cell.memedImageView.image = meme[indexPath.row].memedImage
-
-//        cell.memedImageView.image = meme[indexPath.row].memedImage
-       let textFromMeme = "\(meme[indexPath.row].topText)...\(meme[indexPath.row].bottomText)"
+        let textFromMeme = "\(meme[indexPath.row].topText)...\(meme[indexPath.row].bottomText)"
         cell.memedTextLabel.text = textFromMeme
-//          cell.textLabel!.text = textFromMeme
-//          cell.imageView!.image = meme[indexPath.row].memedImage
-//          cell.imageView!.bounds.size.height = CGFloat(50.0)
-        
-        
         return cell
     }
     
@@ -79,7 +58,7 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
     @IBAction func segueToAddMeme(sender: UIBarButtonItem) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var createMemeVC = storyboard.instantiateViewControllerWithIdentifier("createMemeViewController") as! ViewController
+        var createMemeVC = storyboard.instantiateViewControllerWithIdentifier("createMemeViewController") as! MemeViewController
         let navController = UINavigationController(rootViewController: createMemeVC)
         self.presentViewController(navController, animated: true, completion: nil)
         
