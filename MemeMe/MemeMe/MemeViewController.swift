@@ -30,14 +30,11 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         shareButton.enabled = pickedImage.image != nil //if no image is picked, sharebutton will be disabled.
         
-        println("initial: \(pickedImage.bounds.size)")
-        
         setTextAttributes("HelveticaNeue-CondensedBlack")
         
         if image != nil{
             pickedImage.image = image
         }
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -90,10 +87,6 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
                 pickedImage.image = image
                 shareButton.enabled = pickedImage.image != nil
-                
-                //let rect = CGRectIntegral(AVMakeRectWithAspectRatioInsideRect(pickedImage.image!.size, pickedImage.bounds))
-                
-                //TODO: Tag textfields to the UIImage bounds.
             }
             
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -153,9 +146,6 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         toolbar.hidden = false
         randomFontButton.hidden = false
         
-        
-        //todo Detect image onscreen location and adjusts the position of the text fields accordingly
-        
         return memeImage
     }
     
@@ -163,7 +153,6 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        
         return keyboardSize.CGRectValue().height
         
     }
@@ -173,7 +162,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        //pickerController.allowsEditing = true
+        pickerController.allowsEditing = false
         presentViewController(pickerController, animated: true, completion: nil)
         
     }

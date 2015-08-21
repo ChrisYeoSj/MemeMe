@@ -16,17 +16,13 @@ class MemeDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "editMeme")
         self.navigationItem.rightBarButtonItem = editButton
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
         imageView.image = memedImage
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,14 +40,6 @@ class MemeDetailViewController: UIViewController {
         self.presentViewController(navController, animated: true, completion: nil)
         
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

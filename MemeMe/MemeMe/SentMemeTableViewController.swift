@@ -15,7 +15,6 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Sent Memes" //todo
     }
 
     

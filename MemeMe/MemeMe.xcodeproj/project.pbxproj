@@ -87,13 +87,12 @@
 		8311CC901B80EDB5007DFF9A /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				835843F61B8701F400485133 /* Table View */,
+				835843F51B8701E500485133 /* Collection View */,
 				8311CC931B80EDB5007DFF9A /* AppDelegate.swift */,
 				8311CC951B80EDB5007DFF9A /* MemeViewController.swift */,
 				83F33B231B85D44D00B97450 /* MemeDetailViewController.swift */,
 				8311CCB51B80EE3A007DFF9A /* MemeInstance.swift */,
-				83F33B1D1B85AC6500B97450 /* SentMemeCollectionViewController.swift */,
-				83F33B1F1B85AC7C00B97450 /* SentMemeTableViewController.swift */,
-				83F33B211B85BE4E00B97450 /* SentMemeTableViewCell.swift */,
 				8311CCB31B80EDE7007DFF9A /* Main.storyboard */,
 				8311CC9A1B80EDB5007DFF9A /* Images.xcassets */,
 				8311CC9C1B80EDB5007DFF9A /* LaunchScreen.xib */,
@@ -125,6 +124,23 @@
 				8311CCA81B80EDB5007DFF9A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		835843F51B8701E500485133 /* Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				83F33B1D1B85AC6500B97450 /* SentMemeCollectionViewController.swift */,
+			);
+			name = "Collection View";
+			sourceTree = "<group>";
+		};
+		835843F61B8701F400485133 /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				83F33B1F1B85AC7C00B97450 /* SentMemeTableViewController.swift */,
+				83F33B211B85BE4E00B97450 /* SentMemeTableViewCell.swift */,
+			);
+			name = "Table View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
