@@ -47,10 +47,10 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        println(meme[indexPath.row].memedImage)
-        detailVC.memedImage = meme[indexPath.row].memedImage
+        detailVC.meme = meme[indexPath.row]
+        detailVC.arrayIndex = indexPath.row
         
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        navigationController?.pushViewController(detailVC, animated: true)
         
     }
     
@@ -71,7 +71,7 @@ class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITa
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var createMemeVC = storyboard.instantiateViewControllerWithIdentifier("createMemeViewController") as! MemeViewController
         let navController = UINavigationController(rootViewController: createMemeVC)
-        self.presentViewController(navController, animated: true, completion: nil)
+        presentViewController(navController, animated: true, completion: nil)
         
     }
 }

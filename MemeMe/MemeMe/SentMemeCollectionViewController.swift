@@ -26,7 +26,6 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         meme = appDelegate.memesArray
         sentMemeCollection.reloadData()
-        println(meme.count)
     }
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -50,9 +49,10 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC : MemeDetailViewController = storyboard.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        detailVC.memedImage = meme[indexPath.item].memedImage
+        detailVC.meme = meme[indexPath.item]
+        detailVC.arrayIndex = indexPath.item
         
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        navigationController?.pushViewController(detailVC, animated: true)
         
     }
     @IBAction func segueToAddMeme(sender: UIBarButtonItem) {
@@ -60,7 +60,7 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var createMemeVC = storyboard.instantiateViewControllerWithIdentifier("createMemeViewController") as! MemeViewController
         let navController = UINavigationController(rootViewController: createMemeVC)
-        self.presentViewController(navController, animated: true, completion: nil)
+        presentViewController(navController, animated: true, completion: nil)
         
     }
 

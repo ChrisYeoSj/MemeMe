@@ -20,6 +20,9 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet var albumButton: UIBarButtonItem!
     @IBOutlet var randomFontButton: UIButton!
     
+    
+    var textTop : String!
+    var textBottom : String!
     var image : UIImage!
     var randomFonts: [String]!
     
@@ -30,7 +33,6 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         shareButton.enabled = pickedImage.image != nil //if no image is picked, sharebutton will be disabled.
         
-        setTextAttributes("HelveticaNeue-CondensedBlack")
         
         if image != nil{
             pickedImage.image = image
@@ -39,6 +41,16 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        
+        if textTop == nil && textBottom == nil{
+            
+            setTextAttributesInitial("HelveticaNeue-CondensedBlack")
+            
+        } else {
+            
+            setTextAttributes("HelveticaNeue-CondensedBlack", topText: textTop, bottomText: textBottom)
+            
+        }
 
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
@@ -50,19 +62,39 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         unsubscribeToKeyboardNotification()
     }
     
-    func setTextAttributes(fontName: String){
+    func setTextAttributesInitial(fontName: String){
         
         let memeTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSStrokeColorAttributeName : UIColor.blackColor(), NSFontAttributeName : UIFont(name: fontName, size: 26)!, NSStrokeWidthAttributeName : -7.0, ]
         
-        topTextField.text = "TOP"
+        textTop = "TOP"
+        textBottom = "BOTTOM"
+        
+        topTextField.text = textTop
         topTextField.delegate = self
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = NSTextAlignment.Center
         
-        bottomTextField.text = "BOTTOM"
+        bottomTextField.text = textBottom
         bottomTextField.delegate = self
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = NSTextAlignment.Center
+        
+    }
+    
+    func setTextAttributes(fontName : String, topText : String, bottomText : String){
+        
+        let memeTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSStrokeColorAttributeName : UIColor.blackColor(), NSFontAttributeName : UIFont(name: fontName, size: 26)!, NSStrokeWidthAttributeName : -7.0, ]
+        
+        topTextField.text = topText
+        topTextField.delegate = self
+        topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = NSTextAlignment.Center
+        
+        bottomTextField.text = bottomText
+        bottomTextField.delegate = self
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = NSTextAlignment.Center
+        
         
     }
     
@@ -89,7 +121,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 shareButton.enabled = pickedImage.image != nil
             }
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: nil)
             
     }
     
@@ -137,11 +169,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         toolbar.hidden = true
         randomFontButton.hidden = true
         
-        //UIGraphicsBeginImageContext(self.view.frame.size)
-        
         UIGraphicsBeginImageContext(self.pickedImage.frame.size)
         view.drawViewHierarchyInRect(self.pickedImage.frame, afterScreenUpdates: true)
-        //view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memeImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -186,19 +215,18 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         let activityController = UIActivityViewController(activityItems: [generateMemeImage()], applicationActivities: nil)
         
-        saveMeme()
+
         
         activityController.completionWithItemsHandler = {
             (activity, success, items, error) in
-            println("Activity: \(activity) Success: \(success) Items: \(items) Error: \(error)")
             if success == true{
-                
+                self.saveMeme()
                 let successMessage = UIAlertView(title: "Success", message: nil, delegate: self, cancelButtonTitle: "OK")
                 successMessage.show()
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
-        self.navigationController!.presentViewController(activityController, animated: true, completion: nil)
+        navigationController!.presentViewController(activityController, animated: true, completion: nil)
         
     }
     
@@ -214,7 +242,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBAction func randomFontButton(sender: UIButton) {
         
         var randomNumber : Int = Int(arc4random() % 10)
-        setTextAttributes(randomFonts[randomNumber])
+        setTextAttributesInitial(randomFonts[randomNumber])
     }
     
 }

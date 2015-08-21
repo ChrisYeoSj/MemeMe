@@ -13,15 +13,5 @@ class SentMemeTableViewCell: UITableViewCell {
 
     @IBOutlet var memedImageView: UIImageView!
     @IBOutlet var memedTextLabel: UILabel!
-    
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
 
 }

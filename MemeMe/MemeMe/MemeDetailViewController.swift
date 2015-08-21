@@ -10,34 +10,41 @@ import UIKit
 
 class MemeDetailViewController: UIViewController {
     
-    var memedImage : UIImage!
+    var meme : Meme!
+    var arrayIndex : Int!
     
     @IBOutlet var imageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "editMeme")
-        self.navigationItem.rightBarButtonItem = editButton
+        let deleteButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteMeme")
+        let arrayButtons = [editButton, deleteButton] as [AnyObject]
+        navigationItem.rightBarButtonItems = arrayButtons
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        imageView.image = memedImage
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        imageView.image = meme.memedImage
     }
     
     func editMeme(){
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var createMemeVC : MemeViewController = storyboard.instantiateViewControllerWithIdentifier("createMemeViewController") as! MemeViewController
-        createMemeVC.image = memedImage
+        createMemeVC.image = meme.originalImage
+        createMemeVC.textTop = meme.topText
+        createMemeVC.textBottom = meme.bottomText
         
         let navController = UINavigationController(rootViewController: createMemeVC)
-        self.presentViewController(navController, animated: true, completion: nil)
+        presentViewController(navController, animated: true, completion: nil)
+        
+    }
+    
+    func deleteMeme(){
+        var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.memesArray.removeAtIndex(arrayIndex)
+        navigationController?.popToRootViewControllerAnimated(true)
         
     }
 
