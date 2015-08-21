@@ -17,7 +17,8 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        meme = appDelegate.memesArray
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -25,6 +26,7 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         meme = appDelegate.memesArray
         sentMemeCollection.reloadData()
+        println(meme.count)
     }
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -37,9 +39,9 @@ class SentMemeCollectionViewController: UIViewController, UICollectionViewDelega
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SentMemeCollectionViewCell
     
-        cell.backgroundView = UIImageView(image: meme[indexPath.item].memedImage)
+        cell.sentMemeImageView.image = meme[indexPath.item].memedImage
     
         return cell
     }

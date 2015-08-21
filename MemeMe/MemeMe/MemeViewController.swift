@@ -137,8 +137,11 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         toolbar.hidden = true
         randomFontButton.hidden = true
         
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        //UIGraphicsBeginImageContext(self.view.frame.size)
+        
+        UIGraphicsBeginImageContext(self.pickedImage.frame.size)
+        view.drawViewHierarchyInRect(self.pickedImage.frame, afterScreenUpdates: true)
+        //view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memeImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         

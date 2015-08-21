@@ -539,20 +539,69 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0Yw-fZ-VfY">
-                                    <size key="itemSize" width="180" height="180"/>
+                                    <size key="itemSize" width="200" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sentMemeCell" id="YrD-ux-abN">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sentMemeCell" id="YrD-ux-abN" customClass="SentMemeCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="97S-u6-tSe">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="97S-u6-tSe" secondAttribute="bottom" id="B3h-Lv-6NG"/>
+                                            <constraint firstItem="97S-u6-tSe" firstAttribute="leading" secondItem="YrD-ux-abN" secondAttribute="leading" id="Hrt-6w-YiW"/>
+                                            <constraint firstAttribute="bottom" secondItem="97S-u6-tSe" secondAttribute="bottom" id="L3B-C2-AoC"/>
+                                            <constraint firstItem="97S-u6-tSe" firstAttribute="top" secondItem="YrD-ux-abN" secondAttribute="top" id="Nih-80-far"/>
+                                            <constraint firstAttribute="trailing" secondItem="97S-u6-tSe" secondAttribute="trailing" id="TWq-ra-nDk"/>
+                                            <constraint firstItem="97S-u6-tSe" firstAttribute="top" secondItem="YrD-ux-abN" secondAttribute="top" id="Trz-nY-STX"/>
+                                            <constraint firstAttribute="trailing" secondItem="97S-u6-tSe" secondAttribute="trailing" id="XWO-ya-Sis"/>
+                                            <constraint firstItem="97S-u6-tSe" firstAttribute="leading" secondItem="YrD-ux-abN" secondAttribute="leading" id="eS2-UA-kpt"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="B3h-Lv-6NG"/>
+                                                <exclude reference="Hrt-6w-YiW"/>
+                                                <exclude reference="L3B-C2-AoC"/>
+                                                <exclude reference="Nih-80-far"/>
+                                                <exclude reference="TWq-ra-nDk"/>
+                                                <exclude reference="Trz-nY-STX"/>
+                                                <exclude reference="XWO-ya-Sis"/>
+                                                <exclude reference="eS2-UA-kpt"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="L3B-C2-AoC"/>
+                                                <include reference="Nih-80-far"/>
+                                                <include reference="XWO-ya-Sis"/>
+                                                <include reference="eS2-UA-kpt"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="97S-u6-tSe"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <include reference="B3h-Lv-6NG"/>
+                                                <include reference="Hrt-6w-YiW"/>
+                                                <include reference="TWq-ra-nDk"/>
+                                                <include reference="Trz-nY-STX"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="sentMemeImageView" destination="97S-u6-tSe" id="ZNF-Ki-Ie5"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -703,7 +752,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4gj-GD-6Wk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4gj-GD-6Wk">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
                         </subviews>
